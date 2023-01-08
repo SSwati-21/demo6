@@ -27,7 +27,7 @@ pipeline {
                 echo 'Building the application'
                 echo "$PATH"
                 echo "${env.WORKSPACE}"
-		echo "${env.BRANCHNAME}"
+		echo "${env.BRANCH_NAME}"
                 bat "mvn.cmd -f ${env.WORKSPACE}\\pom.xml clean install"
 			}
 //			when {

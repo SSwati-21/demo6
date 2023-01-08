@@ -22,9 +22,8 @@ pipeline {
 // -- STAGE: Build
 // ------------------------------------
         stage("Build") {
-	    environment {
-            ENV = "Build"
-        steps {
+	    environment { ENV = "Build" }
+            steps {
                 echo 'Building the application'
                 echo "$PATH"
                 echo "${env.WORKSPACE}"

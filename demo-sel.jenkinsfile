@@ -2,43 +2,37 @@
 
 // --------------------------------------------
 // -- CREATED BY: Swati --
+// -- Created Date:
+// -- Version:
 // -- https://github.com/SSwati-21/demo-sel/ --
 // --------------------------------------------
 
-
-// ------------------------------------
-// -- STAGE: Download GIT Code
-    // ------------------------------------
 pipeline {
-    agent any
-    stages {
-        stage("Git") {
-            steps {
-               git 'https://github.com/SSwati-21/demo-sel.git'
-            }
-        }
+    		agent any
+		
+		// ------------------------------------
+		// -- STAGE: Download GIT Code
+		// ------------------------------------
+	    	stages {
+        		stage("Git") {
+            				steps {
+               					git 'https://github.com/SSwati-21/demo-sel.git'
+            				}
+        		}
 	
 		// ------------------------------------
 		// -- STAGE: Build
 		// ------------------------------------
 		stage("Build") {
-	    environment { ENV = "Build" }
-            steps {
-                echo 'Building the application'
-                echo "$PATH"
-                echo "${env.WORKSPACE}"
-		echo "${env.GIT_BRANCH}"
-                bat "mvn.cmd -f ${env.WORKSPACE}\\pom.xml clean install"
-			}
-//			when {
-//  	              environment(name: "ENV", value: "Build")
-//          }
-//            steps {
-//					echo "Build stage"
-//            }
-       }
+	    	          	steps {
+                		echo 'Building the application'
+//                		echo "$PATH"
+//                		echo "${env.WORKSPACE}"
+//				echo "${env.GIT_BRANCH}"
+                		bat "mvn.cmd -f ${env.WORKSPACE}\\pom.xml clean install"
+				}
+       		}
 
-		
 		// ------------------------------------
 		// -- STAGE: Test
 		// ------------------------------------
@@ -47,7 +41,7 @@ pipeline {
 				expression { env.GIT_BRANCH ==  'origin/master' }
 			}
             		steps {
-                		echo 'Testing the application in branch master'
+                		echo 'Testing the application in Branch master(default)'
                 		bat "mvn.cmd test"
             			junit '**/target/surefire-reports/TEST-*.xml'
 			}
@@ -65,12 +59,12 @@ pipeline {
 		}
 		
 		// ------------------------------------
-		// -- STAGE: Deploy
+		// -- STAGE: Deploying
 		// ------------------------------------
 		stage("Deploy") {
-            steps {
-                echo 'Deploying the application'
-            }
+            			steps {
+                			echo 'Deploying the application'
+            			}
 		}
 	}
 }

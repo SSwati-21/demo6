@@ -25,13 +25,13 @@ pipeline {
 		}  
 		
 		stage('SonarQube') {
-            steps{
-                    withSonarQubeEnv('SonarQube') { 
-                        bat "mvn.cmd sonar:sonar"
-                       // junit '**/target/surefire-reports/TEST-*.xml'
-                    }
-                }
-            }
+            			steps{
+                    			withSonarQubeEnv('SonarQube') { 
+                                	bat "mvn.cmd sonar:sonar"
+                    			}
+                		input ('Do you want to proceed?')
+				}
+			}
 		
 		stage("Deploy") {
             steps {

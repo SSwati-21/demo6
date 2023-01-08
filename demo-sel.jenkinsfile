@@ -27,14 +27,14 @@ pipeline {
                 echo 'Building the application'
                 echo "$PATH"
                 echo "${env.WORKSPACE}"
-                bat "mvn.cmd -X -f ${env.WORKSPACE}\\pom.xml clean install"
+                bat "mvn.cmd -f ${env.WORKSPACE}\\pom.xml clean install"
+			}
 //			when {
 //  	              environment(name: "ENV", value: "Build")
 //          }
-            steps {
-					echo "Build stage"
-            }
-            }
+//            steps {
+//					echo "Build stage"
+//            }
        }
 
 		

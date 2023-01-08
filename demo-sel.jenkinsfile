@@ -47,12 +47,12 @@ pipeline {
                 		bat "mvn.cmd test"
             			junit '**/target/surefire-reports/TEST-*.xml'
 			}
-			when {
-				branch "master-*"
-			}
-            		steps {
-                		echo "Hello World!"
-            		}
+		//	when {
+	//			branch "master-*"
+	//		}
+          //  		steps {
+            //    		echo "Hello World!"
+            //		}
             	}  
 		
 		// ------------------------------------

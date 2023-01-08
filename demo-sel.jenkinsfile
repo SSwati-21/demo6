@@ -27,7 +27,7 @@ pipeline {
                 echo 'Building the application'
                 echo "$PATH"
                 echo "${env.WORKSPACE}"
-		echo "${env.BRANCH_NAME}"
+		echo "${env.GIT_BRANCH}"
                 bat "mvn.cmd -f ${env.WORKSPACE}\\pom.xml clean install"
 			}
 //			when {
@@ -44,7 +44,7 @@ pipeline {
 		// ------------------------------------
 		stage("Test") {
 			when {
-				expression { env.BRANCHNAME ==  "*/master" }
+				expression { env.GIT_BRANCH ==  "*/master" }
 			}
             		steps {
                 		echo 'Testing the application in branch master'

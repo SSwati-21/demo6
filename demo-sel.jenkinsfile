@@ -22,14 +22,22 @@ pipeline {
 // -- STAGE: Build
 // ------------------------------------
         stage("Build") {
-            steps {
+	    environment {
+            ENV = "Build"
+        steps {
                 echo 'Building the application'
                 echo "$PATH"
                 echo "${env.WORKSPACE}"
                 bat "mvn.cmd -X -f ${env.WORKSPACE}\\pom.xml clean install"
+		when {
+                environment(name: "ENV", value: "Build")
             }
-        }
-	
+               steps {
+                echo "Build stage"
+                     }
+            }
+       }
+}
 // ------------------------------------
 // -- STAGE: Test
 // ------------------------------------

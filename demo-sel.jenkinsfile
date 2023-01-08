@@ -43,7 +43,7 @@ pipeline {
 		// ------------------------------------
 		stage("Test") {
 			when {
-				branch "master"
+				expression { env.BRANCHNAME ==  "master" }
 			}
             		steps {
                 		echo 'Testing the application in branch master'

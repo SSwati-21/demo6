@@ -1,3 +1,14 @@
+//Jenkinsfile (Declarative Pipeline)
+
+// --------------------------------------------
+// -- CREATED BY: Swati --
+// -- https://github.com/SSwati-21/demo-sel/ --
+// --------------------------------------------
+
+
+// ------------------------------------
+// -- STAGE: Download GIT Code
+    // ------------------------------------
 pipeline {
     agent any
     stages {
@@ -6,6 +17,10 @@ pipeline {
                git 'https://github.com/SSwati-21/demo-sel.git'
             }
         }
+	
+// ------------------------------------
+// -- STAGE: Build
+// ------------------------------------
         stage("Build") {
             steps {
                 echo 'Building the application'
@@ -14,15 +29,21 @@ pipeline {
                 bat "mvn.cmd -X -f ${env.WORKSPACE}\\pom.xml clean install"
             }
         }
+	
+// ------------------------------------
+// -- STAGE: Test
+// ------------------------------------
 		stage("Test") {
             steps {
                 echo 'Testing the application'
                 bat "mvn.cmd test"
                 junit '**/target/surefire-reports/TEST-*.xml'
                 }
-		
-		    
 		}  
+		
+// ------------------------------------
+// -- STAGE: SonarQube
+// ------------------------------------
 		
 		stage('SonarQube') {
             			steps{
@@ -33,6 +54,9 @@ pipeline {
 				}
 			}
 		
+// ------------------------------------
+// -- STAGE: Deploy
+// ------------------------------------
 		stage("Deploy") {
             steps {
                 echo 'Deploying the application'

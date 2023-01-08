@@ -53,8 +53,22 @@ pipeline {
 		
 		stage('SonarQube') {
 			steps{
-                withSonarQubeEnv('SonarQube') { bat "mvn.cmd sonar:sonar"}
-                input ('Do you want to proceed?')
+                		withSonarQubeEnv('SonarQube') { bat "mvn.cmd sonar:sonar"}
+                		input ('Do you want to proceed?')
+			}
+			post {
+        			always {
+            				echo 'Sonar is mandatory for production deployment and will always run'
+        			}
+        			success {
+            				echo 'Code is GREEN for Production!'
+        			}
+				failure {
+            				echo 'Code is RED check sonar report, code will not be deployed in Production'
+        			}
+        			unstable {
+            				echo 'Review Sonar reports before moving to Production'
+        			}	
 			}
 		}
 		

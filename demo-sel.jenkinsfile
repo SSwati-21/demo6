@@ -42,19 +42,18 @@ pipeline {
 		// -- STAGE: Test
 		// ------------------------------------
 		stage("Test") {
-            steps {
-                echo 'Testing the application'
-                bat "mvn.cmd test"
-			when {
-					branch "master-*"
-            	}
+            		steps {
+                		echo 'Testing the application'
+                		bat "mvn.cmd test"
 			}
-            steps {
-                	echo "Hello World!"
-            	}
-            junit '**/target/surefire-reports/TEST-*.xml'
-            }
-		}  
+			when {
+				branch "master-*"
+			}
+            		steps {
+                		echo "Hello World!"
+            		}
+            		junit '**/target/surefire-reports/TEST-*.xml'
+            	}  
 		
 		// ------------------------------------
 		// -- STAGE: SonarQube

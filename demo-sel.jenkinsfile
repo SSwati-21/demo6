@@ -50,7 +50,7 @@ pipeline {
 			when {
 				branch "master-*"
 			}
-               		echo "Hello World!
+               		echo "Hello World!"
             	}  
 		
 		// ------------------------------------

@@ -10,7 +10,8 @@ pipeline {
             steps {
                 echo 'Building the application'
                 echo "$PATH"
-                bat "mvn.cmd clean install"
+                echo "${env.WORKSPACE}"
+                bat "mvn.cmd -X -f ${env.WORKSPACE}\\pom.xml clean install"
             }
         }
 		stage("Test") {

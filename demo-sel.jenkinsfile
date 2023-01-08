@@ -65,6 +65,9 @@ pipeline {
         			}
 				failure {
             				echo 'Code is RED check sonar report, code will not be deployed in Production'
+					script {
+            					error "This pipeline stops here!"
+        				}
         			}
         			unstable {
             				echo 'Review Sonar reports before moving to Production'

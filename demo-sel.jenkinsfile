@@ -45,6 +45,7 @@ pipeline {
             		steps {
                 		echo 'Testing the application'
                 		bat "mvn.cmd test"
+            			junit '**/target/surefire-reports/TEST-*.xml'
 			}
 			when {
 				branch "master-*"
@@ -52,7 +53,6 @@ pipeline {
             		steps {
                 		echo "Hello World!"
             		}
-            		junit '**/target/surefire-reports/TEST-*.xml'
             	}  
 		
 		// ------------------------------------

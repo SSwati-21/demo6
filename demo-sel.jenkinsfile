@@ -18,59 +18,57 @@ pipeline {
             }
         }
 	
-// ------------------------------------
-// -- STAGE: Build
-// ------------------------------------
-        stage("Build") {
+		// ------------------------------------
+		// -- STAGE: Build
+		// ------------------------------------
+		stage("Build") {
 	    environment { ENV = "Build" }
             steps {
                 echo 'Building the application'
                 echo "$PATH"
                 echo "${env.WORKSPACE}"
                 bat "mvn.cmd -X -f ${env.WORKSPACE}\\pom.xml clean install"
-//		when {
-//                environment(name: "ENV", value: "Build")
-//            }
-               steps {
-                echo "Build stage"
-                     }
+//			when {
+//  	              environment(name: "ENV", value: "Build")
+//          }
+            steps {
+					echo "Build stage"
+            }
             }
        }
-}
 
-// ------------------------------------
-// -- STAGE: Test
-// ------------------------------------
-	stage("Test") {
+		
+		// ------------------------------------
+		// -- STAGE: Test
+		// ------------------------------------
+		stage("Test") {
             steps {
                 echo 'Testing the application'
                 bat "mvn.cmd test"
-		when {
-                branch "master-*"
+			when {
+					branch "master-*"
             	}
-            	steps {
+            steps {
                 	echo "Hello World!"
             	}
-                junit '**/target/surefire-reports/TEST-*.xml'
+            junit '**/target/surefire-reports/TEST-*.xml'
             }
-	}  
+		}  
 		
-// ------------------------------------
-// -- STAGE: SonarQube
-// ------------------------------------
+		// ------------------------------------
+		// -- STAGE: SonarQube
+		// ------------------------------------
 		
 		stage('SonarQube') {
-            			steps{
-                    			withSonarQubeEnv('SonarQube') { 
-                                	bat "mvn.cmd sonar:sonar"
-                    			}
-                		input ('Do you want to proceed?')
-				}
+			steps{
+                withSonarQubeEnv('SonarQube') { bat "mvn.cmd sonar:sonar"}
+                input ('Do you want to proceed?')
 			}
+		}
 		
-// ------------------------------------
-// -- STAGE: Deploy
-// ------------------------------------
+		// ------------------------------------
+		// -- STAGE: Deploy
+		// ------------------------------------
 		stage("Deploy") {
             steps {
                 echo 'Deploying the application'

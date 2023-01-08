@@ -29,31 +29,32 @@ pipeline {
                 echo "$PATH"
                 echo "${env.WORKSPACE}"
                 bat "mvn.cmd -X -f ${env.WORKSPACE}\\pom.xml clean install"
-		when {
-                environment(name: "ENV", value: "Build")
-            }
+//		when {
+//                environment(name: "ENV", value: "Build")
+//            }
                steps {
                 echo "Build stage"
                      }
             }
        }
 }
+
 // ------------------------------------
 // -- STAGE: Test
 // ------------------------------------
-		stage("Test") {
+	stage("Test") {
             steps {
                 echo 'Testing the application'
                 bat "mvn.cmd test"
 		when {
                 branch "master-*"
-            }
-            steps {
-                echo "Hello World!"
-            }
+            	}
+            	steps {
+                	echo "Hello World!"
+            	}
                 junit '**/target/surefire-reports/TEST-*.xml'
-                }
-		}  
+            }
+	}  
 		
 // ------------------------------------
 // -- STAGE: SonarQube

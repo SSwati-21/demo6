@@ -29,7 +29,8 @@ pipeline {
 //                		echo "$PATH"
 //                		echo "${env.WORKSPACE}"
 //				echo "${env.GIT_BRANCH}"
-                		bat "mvn.cmd -f ${env.WORKSPACE}\\pom.xml clean install"
+//                		bat "mvn.cmd -f ${env.WORKSPACE}\\pom.xml clean install"
+				bat "mvn.cmd clean install"
 				}
        		}
 

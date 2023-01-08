@@ -44,7 +44,7 @@ pipeline {
 		// ------------------------------------
 		stage("Test") {
 			when {
-				expression { env.GIT_BRANCH ==  "*/master" }
+				expression { env.GIT_BRANCH ==  'origin/master' }
 			}
             		steps {
                 		echo 'Testing the application in branch master'

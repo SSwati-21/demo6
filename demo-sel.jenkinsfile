@@ -42,15 +42,14 @@ pipeline {
 		// -- STAGE: Test
 		// ------------------------------------
 		stage("Test") {
-            		steps {
-                		echo 'Testing the application'
-                		bat "mvn.cmd test"
-            			junit '**/target/surefire-reports/TEST-*.xml'
-			}
 			when {
 				branch "master-*"
 			}
-               		echo "Hello World!"
+            		steps {
+                		echo 'Testing the application in branch master'
+                		bat "mvn.cmd test"
+            			junit '**/target/surefire-reports/TEST-*.xml'
+			}
             	}  
 		
 		// ------------------------------------

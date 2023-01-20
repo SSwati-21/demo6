@@ -48,7 +48,7 @@ pipeline {
 		stage("Deploy") {
             			steps {
                 			echo 'Deploying the application'
-					bat scp "C:\\Users\\Swati\\.m2\\repository\\com\\mycompany\\app\\HelloWorld-app\\1.0-SNAPSHOT>HelloWorld-app-1.0-SNAPSHOT.jar dockeruser@kubernetes.docker.internal:/tmp"
+					bat scp "C:\\Users\\Swati\\.m2\\repository\\com\\mycompany\\app\\HelloWorld-app\\1.0-SNAPSHOT\\HelloWorld-app-1.0-SNAPSHOT.jar dockeruser@kubernetes.docker.internal:/tmp"
             			}
 		}
 	}

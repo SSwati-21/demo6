@@ -1,0 +1,54 @@
+//Jenkinsfile (Declarative Pipeline)
+
+// --------------------------------------------
+// -- CREATED BY: Swati --
+// -- Created Date:
+// -- https://github.com/SSwati-21/demo6/ --
+// ----------------------------------------------
+
+pipeline {
+    		agent any
+		
+		// ------------------------------------
+		// -- STAGE: Download GIT Code
+		// ------------------------------------
+	    	stages {
+        		stage("Git") {
+            				steps {
+               					git 'https://github.com/SSwati-21/demo6.git'
+            				}
+        		}
+	
+		// ------------------------------------
+		// -- STAGE: Build
+		// ------------------------------------
+		stage("Build") {
+	    	          	steps {
+                		echo 'Building the application'
+				bat "mvn clean install"
+				}
+       		}
+
+		// ------------------------------------
+		// -- STAGE: Test
+		// ------------------------------------
+		stage("Test") {
+            		     steps {
+                		echo 'Testing the application'
+				    echo 'Running JUnit Test'
+                		    bat "mvn test"
+            			junit '**/target/surefire-reports/TEST-*.xml'
+			}
+            	}  
+		
+		
+		// ------------------------------------
+		// -- STAGE: Deploying
+		// ------------------------------------
+		stage("Deploy") {
+            			steps {
+                			echo 'Deploying the application'
+            			}
+		}
+	}
+}
